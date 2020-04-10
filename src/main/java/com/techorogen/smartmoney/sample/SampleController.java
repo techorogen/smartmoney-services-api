@@ -1,4 +1,4 @@
-package com.example.demo.sample;
+package com.techorogen.smartmoney.sample;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
