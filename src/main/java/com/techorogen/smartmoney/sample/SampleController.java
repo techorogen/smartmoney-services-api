@@ -1,8 +1,9 @@
 package com.techorogen.smartmoney.sample;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * @author vlad.ciontescu
@@ -12,8 +13,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/sample")
 public class SampleController {
 
-    @GetMapping
-    public String test() {
-        return "Hello Cloud World!";
+    private final SampleMapper sampleMapper;
+    private final SampleService sampleService;
+
+    @Autowired
+    public SampleController(SampleMapper sampleMapper, SampleService sampleService) {
+        this.sampleMapper = sampleMapper;
+        this.sampleService = sampleService;
+    }
+
+    @GetMapping("/{id}")
+    public SampleDTO get(@PathVariable int id) {
+        Sample sample = sampleService.getById(id);
+        return sampleMapper.entityToDto(sample);
+    }
+
+    @PostMapping
+    public SampleDTO post(@RequestBody @Valid SampleDTO sampleDTO) {
+        Sample sample = sampleMapper.dtoToEntity(sampleDTO);
+        Sample newSample = sampleService.create(sample);
+        return sampleMapper.entityToDto(newSample);
     }
 }
