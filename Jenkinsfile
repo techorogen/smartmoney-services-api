@@ -4,12 +4,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat "mvnw clean"
+                bat "mvn"
             }
         }
         stage('Deploy') {
             steps {
-                bat label: 'check_java', script: 'java'
+                echo 'done'
             }
         }
     }
