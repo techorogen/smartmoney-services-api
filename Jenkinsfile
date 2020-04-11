@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'mvnw clean package -DskipTests'
+                bat 'mvnw clean package'
             }
         }
         stage('Deploy') {
