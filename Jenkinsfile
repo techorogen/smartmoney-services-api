@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat label: 'build_project', script: 'mvnw'
+                bat "mvnw clean"
             }
         }
         stage('Deploy') {
