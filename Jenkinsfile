@@ -4,17 +4,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                cmd_exec('mvnw clean package')
+                bat label: 'build_project', script: 'mvnw clean package -DskipTests'
             }
         }
         stage('Deploy') {
             steps {
-                cmd_exec('java -version')
+                bat label: 'check_java', script: 'java -version'
             }
         }
-    }
-
-    def cmd_exec(command) {
-        return bat(returnStdout: true, script: "${command}").trim()
     }
 }
