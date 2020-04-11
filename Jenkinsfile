@@ -4,12 +4,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat "mvn clean"
+                bat "mvn clean package -DskipTests"
             }
         }
         stage('Deploy') {
             steps {
-                echo 'done'
+                echo "java -Dspring.profiles.active=qa -jar target\\core-0.0.1-SNAPSHOT.jar"
             }
         }
     }
